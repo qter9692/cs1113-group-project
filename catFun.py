@@ -46,10 +46,24 @@ myimage = dw.loadImage("cat.bmp")
 # state -> image (IO)
 # draw the cat halfway up the screen (height/2) and at the x
 # coordinate given by the first component of the state tuple
-#
+'''this code shows the user how close the image is from leaving the screen based on the background, white shows low danger, blue shows medium danger, and red shows high danger'''
 def updateDisplay(state):
     dw.fill(dw.black)
     dw.draw(myimage, (state[0], state[2]))
+    if 350 >= state[0] >= 150 and 350 >= state [2] >= 150 :
+        dw.fill(dw.white)
+        dw.draw(myimage, (state[0], state[2]))
+    elif (450 > state[0] > 50 and (150 > state[2] > 50 or 450 > state[2] > 350)):
+        dw.fill(dw.blue)
+        dw.draw(myimage, (state[0], state[2]))
+    elif (150 > state[0] > 50 or 450 > state[0] > 350) and 350 > state[2] > 150:
+        dw.fill(dw.blue)
+        dw.draw(myimage, (state[0], state[2]))
+    else:
+        dw.fill(dw.red)
+        dw.draw(myimage, (state[0], state[2]))
+
+    
 
 
 ################################################################
@@ -104,7 +118,8 @@ def handleEvent(state, event):
 # World state will be single x coordinate at left edge of world
 
 # The cat starts at the left, moving right 
-initState = (randint(0,499),randint(1,5),randint(0,499),randint(1,5))
+initState = (randint(250,350),randint(-3,3),randint(250,350),randint(-3,3))
+
 
 # Run the simulation no faster than 60 frames per second
 frameRate = 60
