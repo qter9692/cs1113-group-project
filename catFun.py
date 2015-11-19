@@ -55,7 +55,7 @@ mycheese = dw.loadImage("cheese.jpeg")
 '''this code shows the user how close the image is from leaving the screen based on the background, white shows low danger, blue shows medium danger, and red shows high danger'''
 def updateDisplay(state):
     dw.fill(dw.black)
-    dw.draw(myimage, (state[0], state[2]))
+    dw.draw(myimage, (state[0], state[2])) 
     if 350 >= state[0] >= 150 and 350 >= state [2] >= 150 :
         dw.fill(dw.white)
         dw.draw(myimage, (state[0], state[2]))
@@ -68,7 +68,7 @@ def updateDisplay(state):
     else:
         dw.fill(dw.red)
         dw.draw(myimage, (state[0], state[2]))
-
+    dw.draw(mymouse, (height/2,width/2))
     
 
 
@@ -123,7 +123,8 @@ def handleEvent(state, event):
 
 # World state will be single x coordinate at left edge of world
 
-# The cat starts at the left, moving right 
+# The cat starts at the left, moving right
+# The mouse starts in the bottom right of the screen
 initState = (randint(250,350),randint(-3,3),randint(250,350),randint(-3,3))
 
 
