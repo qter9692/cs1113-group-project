@@ -46,7 +46,7 @@ myimage2 = dw.loadImage("level2.jpeg")
 myimage3 = dw.loadImage("level3.jpeg")
 myimage4 = dw.loadImage("level4.jpeg")
 myimage5 = dw.loadImage("level5.jpeg")
-mymouse = dw.loadImage("mouse.jpg")
+mymouse = dw.loadImage("mouse.jpeg")
 mycheese = dw.loadImage("cheese.jpeg")
 
 # state -> image (IO)
@@ -55,22 +55,8 @@ mycheese = dw.loadImage("cheese.jpeg")
 '''this code shows the user how close the image is from leaving the screen based on the background, white shows low danger, blue shows medium danger, and red shows high danger'''
 def updateDisplay(state):
     dw.fill(dw.black)
-    dw.draw(myimage, (state[0], state[2])) 
-    if 350 >= state[0] >= 150 and 350 >= state [2] >= 150 :
-        dw.fill(dw.white)
-        dw.draw(myimage, (state[0], state[2]))
-    elif (450 > state[0] > 50 and (150 > state[2] > 50 or 450 > state[2] > 350)):
-        dw.fill(dw.blue)
-        dw.draw(myimage, (state[0], state[2]))
-    elif (150 > state[0] > 50 or 450 > state[0] > 350) and 350 > state[2] > 150:
-        dw.fill(dw.blue)
-        dw.draw(myimage, (state[0], state[2]))
-    else:
-        dw.fill(dw.red)
-        dw.draw(myimage, (state[0], state[2]))
-    dw.draw(mymouse, (height/2,width/2))
-    
-
+    dw.draw(myimage, (state[0], state[2]))
+    dw.draw(mymouse, (state[4], state[6]))
 
 ################################################################
 
@@ -82,11 +68,15 @@ def updateDisplay(state):
 # state -> state
 def updateState(state):
     if state[0] == (width - 80) or state [0] == 0:
-        return (state[0] - state[1], -1 * state[1],state[2]-state[3],state[3])
+        return (state[0] - state[1], -1 * state[1],state[2]-state[3],state[3], state[4]+state[5],state[5],state[6]+state[7],state[7])
     if state[2] == (height - 80) or state[2] == 0:
-        return (state[0] - state[1],state[1],state[2]-state[3], -1 * state[3])
+        return (state[0] - state[1],state[1],state[2]-state[3], -1 * state[3],state[4]+state[5],state[5],state[6]+state[7],state[7])
+    if state[4] == (width - 50) or state [4] == 0:
+        return (state[0]+state[1],state [1],state[2]+state[3],state[3],state[4] - state[5], -1 * state[5],state[6]-state[7],state[7])
+    if state[6] == (height - 50) or state[6] == 0:
+        return (state[0]+state[1],state [1],state[2]+state[3],state[3],state[4] - state[5],state[5],state[6]-state[7], -1 * state[7])
     else:
-        return(state[0] + state[1], state[1],state[2] + state[3], state[3])
+        return(state[0] + state[1], state[1], state[2] + state[3], state[3],state[4]+state[5],state[5],state[6]+state[7],state[7])
 
 ################################################################
 
@@ -94,7 +84,7 @@ def updateState(state):
 # that is, when pos is less then zero or greater than the screen width
 # state -> bool
 def endState(state):
-    if (state[0] > width or state[0] < 0 or state[2] > height or state [2] < 0): 
+    if ((state[0]-50) < state[4] and state[4] < (state[0]+130) and (state[2]-50) <state[6] and state[6] < (state[2]+130)):
         return True
     else:
         return False 
@@ -116,11 +106,11 @@ def endState(state):
 def handleEvent(state, event):  
 #    print("Handling event: " + str(event))
     if (event.type == pg.MOUSEBUTTONDOWN):
-        if (state[1],state[3]) == (state[1],state[3]):
-            newState = (randint(-1,1),randint(-1,1))
+        if (state[5],state[7]) == (state[5],state[7]):
+            newState = (randint(-1,1),randint(-1,1))            
         else:
             newState = (randint(-1,1),randint(-1,1))   
-        return((state[0],newState[0],state[2],newState[1]))
+        return((state[0],state[1],state[2],state[3],state[4],newState[0],state[6],newState[1]))
     else:
         return(state)
 
@@ -130,7 +120,7 @@ def handleEvent(state, event):
 
 # The cat starts at the left, moving right
 # The mouse starts in the bottom right of the screen
-initState = (randint(250,350),randint(-1,1),randint(250,350),randint(-1,1))
+initState = (randint(250,350),randint(-1,1),randint(250,350),randint(-1,1),50, randint(-1,1), 50, randint(-1,1))
 
 
 # Run the simulation no faster than 60 frames per second
