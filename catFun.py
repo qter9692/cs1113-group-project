@@ -41,7 +41,13 @@ rw.newDisplay(width, height, name)
 
 
 # Display the state by drawing a cat at that x coordinate
-myimage = dw.loadImage("cat.bmp")
+myimage = dw.loadImage("level1.jpeg")
+myimage2 = dw.loadImage("level2.jpeg")
+myimage3 = dw.loadImage("level3.jpeg")
+myimage4 = dw.loadImage("level4.jpeg")
+myimage5 = dw.loadImage("level5.jpeg")
+mymouse = dw.loadImage("mouse.jpg")
+mycheese = dw.loadImage("cheese.jpeg")
 
 # state -> image (IO)
 # draw the cat halfway up the screen (height/2) and at the x
