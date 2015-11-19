@@ -81,7 +81,12 @@ def updateDisplay(state):
 #
 # state -> state
 def updateState(state):
-    return(state[0]+state[1],state[1],state[2]+state[3],state[3])
+    if state[0] == (width - 80) or state [0] == 0:
+        return (state[0] - state[1], -1 * state[1],state[2]-state[3],state[3])
+    if state[2] == (height - 80) or state[2] == 0:
+        return (state[0] - state[1],state[1],state[2]-state[3], -1 * state[3])
+    else:
+        return(state[0] + state[1], state[1],state[2] + state[3], state[3])
 
 ################################################################
 
@@ -112,9 +117,9 @@ def handleEvent(state, event):
 #    print("Handling event: " + str(event))
     if (event.type == pg.MOUSEBUTTONDOWN):
         if (state[1],state[3]) == (state[1],state[3]):
-            newState = (randint(-5,5),randint(-5,5))
+            newState = (randint(-1,1),randint(-1,1))
         else:
-            newState = (randint(-5,5),randint(-5,5))   
+            newState = (randint(-1,1),randint(-1,1))   
         return((state[0],newState[0],state[2],newState[1]))
     else:
         return(state)
@@ -125,7 +130,7 @@ def handleEvent(state, event):
 
 # The cat starts at the left, moving right
 # The mouse starts in the bottom right of the screen
-initState = (randint(250,350),randint(-3,3),randint(250,350),randint(-3,3))
+initState = (randint(250,350),randint(-1,1),randint(250,350),randint(-1,1))
 
 
 # Run the simulation no faster than 60 frames per second
