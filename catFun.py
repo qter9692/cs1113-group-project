@@ -57,6 +57,7 @@ def updateDisplay(state):
     dw.fill(dw.black)
     dw.draw(myimage, (state[0], state[2]))
     dw.draw(mymouse, (state[4], state[6]))
+    dw.draw(mycheese, (state[8],state[9]))
 
 ################################################################
 
@@ -68,15 +69,15 @@ def updateDisplay(state):
 # state -> state
 def updateState(state):
     if state[0] == (width - 80) or state [0] == 0:
-        return (state[0] - state[1], -1 * state[1],state[2]-state[3],state[3], state[4]+state[5],state[5],state[6]+state[7],state[7])
+        return (state[0] - state[1], -1 * state[1],state[2]-state[3],state[3], state[4]+state[5],state[5],state[6]+state[7],state[7],state[8],state[9])
     if state[2] == (height - 80) or state[2] == 0:
-        return (state[0] - state[1],state[1],state[2]-state[3], -1 * state[3],state[4]+state[5],state[5],state[6]+state[7],state[7])
+        return (state[0] - state[1],state[1],state[2]-state[3], -1 * state[3],state[4]+state[5],state[5],state[6]+state[7],state[7],state[8],state[9])
     if state[4] == (width - 50) or state [4] == 0:
-        return (state[0]+state[1],state [1],state[2]+state[3],state[3],state[4] - state[5], -1 * state[5],state[6]-state[7],state[7])
+        return (state[0]+state[1],state [1],state[2]+state[3],state[3],state[4] - state[5], -1 * state[5],state[6]-state[7],state[7],state[8],state[9])
     if state[6] == (height - 50) or state[6] == 0:
-        return (state[0]+state[1],state [1],state[2]+state[3],state[3],state[4] - state[5],state[5],state[6]-state[7], -1 * state[7])
+        return (state[0]+state[1],state [1],state[2]+state[3],state[3],state[4] - state[5],state[5],state[6]-state[7], -1 * state[7],state[8],state[9])
     else:
-        return(state[0] + state[1], state[1], state[2] + state[3], state[3],state[4]+state[5],state[5],state[6]+state[7],state[7])
+        return(state[0] + state[1], state[1], state[2] + state[3], state[3],state[4]+state[5],state[5],state[6]+state[7],state[7],state[8],state[9])
 
 ################################################################
 
@@ -84,7 +85,7 @@ def updateState(state):
 # that is, when pos is less then zero or greater than the screen width
 # state -> bool
 def endState(state):
-    if ((state[0]-50) < state[4] and state[4] < (state[0]+130) and (state[2]-50) <state[6] and state[6] < (state[2]+130)):
+    if ((state[0]-50) < state[4] and state[4] < (state[0]+80) and (state[2]-50) <state[6] and state[6] < (state[2]+80)):
         return True
     else:
         return False 
@@ -110,7 +111,7 @@ def handleEvent(state, event):
             newState = (randint(-1,1),randint(-1,1))            
         else:
             newState = (randint(-1,1),randint(-1,1))   
-        return((state[0],state[1],state[2],state[3],state[4],newState[0],state[6],newState[1]))
+        return((state[0],state[1],state[2],state[3],state[4],newState[0],state[6],newState[1],state[8],state[9]))
     else:
         return(state)
 
@@ -120,7 +121,7 @@ def handleEvent(state, event):
 
 # The cat starts at the left, moving right
 # The mouse starts in the bottom right of the screen
-initState = (randint(250,350),randint(-1,1),randint(250,350),randint(-1,1),50, randint(-1,1), 50, randint(-1,1))
+initState = (randint(250,350),randint(-1,1),randint(250,350),randint(-1,1),50, randint(-1,1), 50, randint(-1,1),randint(250,350),randint(250,350))
 
 
 # Run the simulation no faster than 60 frames per second
@@ -129,3 +130,53 @@ frameRate = 60
 # Run the simulation!
 rw.runWorld(initState, updateDisplay, updateState, handleEvent,
             endState, frameRate)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
