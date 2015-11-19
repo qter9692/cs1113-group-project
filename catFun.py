@@ -68,6 +68,9 @@ def updateDisplay(state):
 # components by name (as we saw with records in Idris).
 #
 # state -> state
+
+"""states 0-3 define respectively the x,delta x, y, delta y of cat 1. states 4-7 define the x, delta x, y, delta y of the user controlled mouse, states 8-9 define the x, y of the cheese"""
+    
 def updateState(state):
     if state[0] == (width - 80) or state [0] == 0:
         return (state[0] - state[1], -1 * state[1],state[2]-state[3],state[3], state[4]+state[5],state[5],state[6]+state[7],state[7],state[8],state[9])
@@ -128,7 +131,8 @@ def handleEvent(state, event):
 x = randint(-1,1)
 y = randint(-1,1)
 while (x == 0 and y == 0):
-    x == randint (-1,1) and y == randint (-1,1)
+    x = randint (-1,1)
+    y = randint (-1,1)
    
     
 initState = (randint(250,350),x,randint(250,350),y,50, randint(-1,1), 50, randint(-1,1),randint(0,450),randint(0,450))
