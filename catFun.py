@@ -4,6 +4,7 @@ import pygame as pg
 from random import randint
 
 
+
 ################################################################
 
 # This program is an interactive simulation/game. A cat starts
@@ -76,6 +77,8 @@ def updateState(state):
         return (state[0]+state[1],state [1],state[2]+state[3],state[3],state[4] - state[5], -1 * state[5],state[6]-state[7],state[7],state[8],state[9])
     if state[6] == (height - 50) or state[6] == 0:
         return (state[0]+state[1],state [1],state[2]+state[3],state[3],state[4] - state[5],state[5],state[6]-state[7], -1 * state[7],state[8],state[9])
+    if ((state[4]-50) < state[8]  < (state[4]+50) and (state[6]-50) < state[9] < (state[6]+50)):
+        return (state[0]+state[1],state[1],state[2]+state[3],state[3],state[4]+state[5],state[5],state[6]+state[7],state[7],(randint(0,420)),randint(0,420))
     else:
         return(state[0] + state[1], state[1], state[2] + state[3], state[3],state[4]+state[5],state[5],state[6]+state[7],state[7],state[8],state[9])
 
@@ -121,11 +124,18 @@ def handleEvent(state, event):
 
 # The cat starts at the left, moving right
 # The mouse starts in the bottom right of the screen
-initState = (randint(250,350),randint(-1,1),randint(250,350),randint(-1,1),50, randint(-1,1), 50, randint(-1,1),randint(250,350),randint(250,350))
+
+x = randint(-1,1)
+y = randint(-1,1)
+while (x == 0 and y == 0):
+    x == randint (-1,1) and y == randint (-1,1)
+   
+    
+initState = (randint(250,350),x,randint(250,350),y,50, randint(-1,1), 50, randint(-1,1),randint(0,450),randint(0,450))
 
 
 # Run the simulation no faster than 60 frames per second
-frameRate = 60
+frameRate = 30
 
 # Run the simulation!
 rw.runWorld(initState, updateDisplay, updateState, handleEvent,
