@@ -49,16 +49,27 @@ myimage4 = dw.loadImage("level4.jpeg")
 myimage5 = dw.loadImage("level5.jpeg")
 mymouse = dw.loadImage("mouse.jpeg")
 mycheese = dw.loadImage("cheese.jpeg")
+#fonts for words
+font = pg.font.Font(None, 60)
+dangerText = font.render("DANGER!", 1, (255, 255, 0))
 
 # state -> image (IO)
 # draw the cat halfway up the screen (height/2) and at the x
 # coordinate given by the first component of the state tuple
-'''this code shows the user how close the image is from leaving the screen based on the background, white shows low danger, blue shows medium danger, and red shows high danger'''
+'''this code shows the user how close the mouse is from the cat by turning the screen red and displaying danger when they are close'''
 def updateDisplay(state):
     dw.fill(dw.black)
     dw.draw(myimage, (state[0], state[2]))
     dw.draw(mymouse, (state[4], state[6]))
     dw.draw(mycheese, (state[8],state[9]))
+    if ((state[0]-75) < state[4] and state[4] < (state[0]+105) and (state[2]-75) <state[6] and state[6] < (state[2]+105)):
+        dw.fill(dw.red)
+        dw.draw(myimage, (state[0], state[2]))
+        dw.draw(mymouse, (state[4], state[6]))
+        dw.draw(mycheese, (state[8],state[9]))
+        dw.draw(dangerText, (state[4] - 70 , state[6] + 70))
+        
+
 
 ################################################################
 
