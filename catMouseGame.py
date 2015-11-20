@@ -83,14 +83,24 @@ def updateDisplay(state):
 """states 0-3 define respectively the x,delta x, y, delta y of cat 1. states 4-7 define the x, delta x, y, delta y of the user controlled mouse, states 8-9 define the x, y of the cheese"""
     
 def updateState(state):
+
+    #causes cat1 to bounce off x defined boundries of window 
     if state[0] == (width - 80) or state [0] == 0:
         return (state[0] - state[1], -1 * state[1],state[2]-state[3],state[3], state[4]+state[5],state[5],state[6]+state[7],state[7],state[8],state[9])
+
+    #causes cat1 to bounce off y defined boundries of window 
     if state[2] == (height - 80) or state[2] == 0:
         return (state[0] - state[1],state[1],state[2]-state[3], -1 * state[3],state[4]+state[5],state[5],state[6]+state[7],state[7],state[8],state[9])
+
+    #causes mouse to bounce off x defined boundries of window 
     if state[4] == (width - 50) or state [4] == 0:
         return (state[0]+state[1],state [1],state[2]+state[3],state[3],state[4] - state[5], -1 * state[5],state[6]-state[7],state[7],state[8],state[9])
+
+    #causes cat1 to bounce off y defined boundries of window 
     if state[6] == (height - 50) or state[6] == 0:
         return (state[0]+state[1],state [1],state[2]+state[3],state[3],state[4] - state[5],state[5],state[6]-state[7], -1 * state[7],state[8],state[9])
+
+    #hitbox detection for cheese
     if ((state[4]-50) < state[8]  < (state[4]+50) and (state[6]-50) < state[9] < (state[6]+50)):
         return (state[0]+state[1],state[1],state[2]+state[3],state[3],state[4]+state[5],state[5],state[6]+state[7],state[7],(randint(0,420)),randint(0,420))
     else:
@@ -101,6 +111,8 @@ def updateState(state):
 # Terminate the simulation when the x coord reaches the screen edge,
 # that is, when pos is less then zero or greater than the screen width
 # state -> bool
+
+#Terminate the simulation when the mouse hits the cat
 def endState(state):
     if ((state[0]-50) < state[4] and state[4] < (state[0]+80) and (state[2]-50) <state[6] and state[6] < (state[2]+80)):
         return True
@@ -139,6 +151,7 @@ def handleEvent(state, event):
 # The cat starts at the left, moving right
 # The mouse starts in the bottom right of the screen
 
+#defining x and y makes sure cats velocity cant be (0,0)
 x = randint(-1,1)
 y = randint(-1,1)
 while (x == 0 and y == 0):

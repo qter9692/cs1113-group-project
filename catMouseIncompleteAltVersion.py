@@ -47,25 +47,29 @@ def updateDisplay(state):
 # state -> state
 def updateState(state):
 
-    #causes cat1 to bounce off sides of window
+    #causes cat1 to bounce off x defined boundries of window
     if state[0] == (width - 80) or state [0] == 0:
         return (state[0] - state[1], -1 * state[1], state[2]-state[3], state[3], state[4]+state[5],state[5],state[6]+state[7],state[7],state[8],state[9],state[10]+state[11],state[11],state[12]+state[13],state[13])
+
+    #causes cat1 to bounce off y defined boundries of window 
     if state[2] == (height - 80) or state[2] == 0:
         return (state[0] - state[1],state[1],state[2]-state[3], -1 * state[3],state[4]+state[5],state[5],state[6]+state[7],state[7],state[8],state[9],state[10]+state[11],state[11],state[12]+state[13],state[13])
 
-    #causes mouse to bounce off sides of window
+    #causes mouse to bounce off x defined boundries of window 
     if state[4] == (width - 50) or state [4] == 0:
         return (state[0]+state[1],state [1],state[2]+state[3],state[3],state[4] - state[5], -1 * state[5],state[6]-state[7],state[7],state[8],state[9],state[10]+state[11],state[11],state[12]+state[13],state[13])
+    #causes cat1 to bounce off y defined boundries of window 
     if state[6] == (height - 50) or state[6] == 0:
         return (state[0]+state[1],state [1],state[2]+state[3],state[3],state[4] - state[5],state[5],state[6]-state[7], -1 * state[7],state[8],state[9],state[10]+state[11],state[11],state[12]+state[13],state[13])
 
     #hitbox detection for cheese and summoner of cat 2
     if ((state[4]-50) < state[8]  < (state[4]+50) and (state[6]-50) < state[9] < (state[6]+50)):
         return (state[0]+state[1],state[1],state[2]+state[3],state[3],state[4]+state[5],state[5],state[6]+state[7],state[7],randint(0,420),randint(0,420),randint(0,420),x2,randint(0,420),y2)
+    #causes cat2 to bounce off x defined boundries of window 
     if state[10] == (width - 80) or state [10] == 0:
         return (state[0] + state[1], state[1], state[2]+state[3], state[3], state[4]+state[5],state[5],state[6]+state[7],state[7],state[8],state[9],state[10]-state[11],-1*state[11],state[12]-state[13],state[13])
 
-    #causes cat 2 to bounce off sides of window
+    #causes cat2 to bounce off y defined boundries of window 
     if state[12] == (height - 80) or state[12] == 0:
         return (state[0] + state[1],state[1],state[2]+state[3], state[3],state[4]+state[5],state[5],state[6]+state[7],state[7],state[8],state[9],state[10]-state[11],state[11],state[12]-state[13],-1*state[13])    
     else:
