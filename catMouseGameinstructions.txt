@@ -1,0 +1,8 @@
+In the game catMouseGame.py you control the mouse by clicking the
+mouse. This causes the mouse to change the direction its moving to a
+new random direction. To Play the game catMouseGame.py, the goal is
+for the mouse to keep collecting cheese and to avoid being caught by
+the cat, which is moving in a constant direction. The game ends when
+the mouse and cat touch.
+
+catMouseGame by Alec Miller, Ziyuan Jin, and Andrew Duran
