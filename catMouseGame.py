@@ -43,10 +43,6 @@ rw.newDisplay(width, height, name)
 
 # Display the state by drawing a cat at that x coordinate
 myimage = dw.loadImage("level1.jpeg")
-myimage2 = dw.loadImage("level2.jpeg")
-myimage3 = dw.loadImage("level3.jpeg")
-myimage4 = dw.loadImage("level4.jpeg")
-myimage5 = dw.loadImage("level5.jpeg")
 mymouse = dw.loadImage("mouse.jpeg")
 mycheese = dw.loadImage("cheese.jpeg")
 #fonts for words
@@ -59,12 +55,12 @@ dangerText = font.render("DANGER!", 1, (255, 255, 0))
 '''this code shows the user how close the mouse is from the cat by turning the screen red and displaying danger when they are close'''
 def updateDisplay(state):
     dw.fill(dw.black)
-    dw.draw(myimage, (state[0], state[2]))
+    dw.draw(myimage, (state.mouse.xcord, state.mouse.ycord))
     dw.draw(mymouse, (state[4], state[6]))
     dw.draw(mycheese, (state[8],state[9]))
     if ((state[0]-75) < state[4] and state[4] < (state[0]+105) and (state[2]-75) <state[6] and state[6] < (state[2]+105)):
         dw.fill(dw.red)
-        dw.draw(myimage, (state[0], state[2]))
+        dw.draw(myimage, (state.mouse., state[2]))
         dw.draw(mymouse, (state[4], state[6]))
         dw.draw(mycheese, (state[8],state[9]))
         dw.draw(dangerText, (state[4] - 70 , state[6] + 70))
@@ -158,15 +154,43 @@ while (x == 0 and y == 0):
     x = randint (-1,1)
     y = randint (-1,1)
    
-    
-initState = (randint(250,350),x,randint(250,350),y,50, randint(-1,1), 50, randint(-1,1),randint(0,450),randint(0,450))
+initstate = {
+    'catxcord': randint(250,350)
+    'catxvelocity': x
+    'catycord': randint(250,350)
+    'catyvelocity': y
+    'mousexcord': 50
+    'mousexvelocity': randint(-1,1)
+    'mouseycord': 50
+    'mouseyvelocity': randint(-1,1)
+    'cheesexcord': randint(0,450)
+    'cheeseycord': randint(0,450)
+    }
+
+class State:
+    def mouse(self,integer):
+        self.xcord = integer
+        self.xvelocity = integer
+        self.ycord = integer
+        self.yvelocity = integer
+    def cat(self,integer):
+        self.xcord = integer
+        self.xvelocity = integer
+        self.ycord = integer
+        self.yvelocity = integer
+    def cheese(self,integer):
+        self.xcord = integer
+        self.ycord = integer
+        
+ooInitState = State()       
+#initState = (randint(250,350),x,randint(250,350),y,50, randint(-1,1), 50, randint(-1,1),randint(0,450),randint(0,450))
 
 
 # Run the simulation no faster than 60 frames per second
 frameRate = 30
 
 # Run the simulation!
-rw.runWorld(initState, updateDisplay, updateState, handleEvent,
+rw.runWorld(ooInitState, updateDisplay, updateState, handleEvent,
             endState, frameRate)
 
 
