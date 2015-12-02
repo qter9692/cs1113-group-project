@@ -55,15 +55,15 @@ dangerText = font.render("DANGER!", 1, (255, 255, 0))
 '''this code shows the user how close the mouse is from the cat by turning the screen red and displaying danger when they are close'''
 def updateDisplay(state):
     dw.fill(dw.black)
-    dw.draw(myimage, (state.mouse.xcord, state.mouse.ycord))
-    dw.draw(mymouse, (state[4], state[6]))
-    dw.draw(mycheese, (state[8],state[9]))
-    if ((state[0]-75) < state[4] and state[4] < (state[0]+105) and (state[2]-75) <state[6] and state[6] < (state[2]+105)):
+    dw.draw(myimage, (state.cat.xcord, state.cat.ycord))
+    dw.draw(mymouse, (state.mouse.xcord, state.mouse.ycord))
+    dw.draw(mycheese, (state.cheese.xcord,state.cheese.ycord))
+    if ((state.cheese.xcord-75) < state.mouse.xcord and state.mouse.xcord < (state.cat.xcord+105) and (state.cat.ycord-75) <state.mouse.ycord and state.mouse.ycord < (state.cat.ycord+105)):
         dw.fill(dw.red)
-        dw.draw(myimage, (state.mouse., state[2]))
-        dw.draw(mymouse, (state[4], state[6]))
-        dw.draw(mycheese, (state[8],state[9]))
-        dw.draw(dangerText, (state[4] - 70 , state[6] + 70))
+        dw.draw(myimage, (state.cat.xcord, state.cat.ycord))
+        dw.draw(mymouse, (state.mouse.xcord, state.mouse.ycord))
+        dw.draw(mycheese, (state.cheese.xcord,state.cheese.ycord))
+        dw.draw(dangerText, (state.mouse.xcord - 70 , state.mouse.ycord + 70))
         
 
 
@@ -182,7 +182,8 @@ class State:
         self.xcord = integer
         self.ycord = integer
         
-ooInitState = State()       
+ooInitState = State()
+#initState= (state0=catxcord,state1-catxvelocity,state2-catycord,state3-catyvelocity,state4-mousexcord,state5-mousexvelocity,state6-mouseycord,state7-mouseyvelocity,state8-cheesexcord,state9-cheeseycord)
 #initState = (randint(250,350),x,randint(250,350),y,50, randint(-1,1), 50, randint(-1,1),randint(0,450),randint(0,450))
 
 
