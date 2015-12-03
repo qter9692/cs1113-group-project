@@ -82,27 +82,54 @@ def updateState(state):
 
     #causes cat1 to bounce off x defined boundries of window 
     if state.cat["xcord"] == (width - 80) or state.cat["xcord"] == 0:
-        return (state.cat["xcord"] - state.cat["xvelocity"], -1 * state.cat["xvelocity"] ,state.cat["ycord"] - state.cat["yvelocity"], state.cat["yvelocity"] , state.mouse["xcord"] + state.mouse["xvelocity"], state.mouse["xvelocity"], state.mouse["ycord"]+state.mouse["yvelocity"], state.mouse["yvelocity"] ,state.cheese["xcord"],state.cheese["ycord"])
+        state.cat["xcord"] = state.cat["xcord"] - state.cat["xvelocity"]
+        state.cat["xvelocity"] =  -1 * state.cat["xvelocity"]
+        state.cat["ycord"] = state.cat["ycord"] - state.cat["yvelocity"]
+        state.mouse["xcord"] =  state.mouse["xcord"] + state.mouse["xvelocity"]
+        state.mouse["ycord"] = state.mouse["ycord"]+state.mouse["yvelocity"]
+        return (state)
 
     #causes cat1 to bounce off y defined boundries of window 
     if state.cat["ycord"] == (height - 80) or state.cat["ycord"] == 0:
-        return (state.cat["xcord"] - stat.cat["xvelocity"],state.cat["xvelocity"],state.cat["ycord"]-state.cat["yvelocity"], -1 * state.cat["yvelocity"], state.mouse["xcord"] + state.mouse["xvelocity"], state.mouse["xvelocity"], state.mouse["ycord"]+state.mouse["yvelocity"], state.mouse["yvelocity"] ,state.cheese["xcord"],state.cheese["ycord"])
+        state.cat["xcord"] = state.cat["xcord"] - stat.cat["xvelocity"]
+        state.cat["ycord"] = state.cat["ycord"]-state.cat["yvelocity"]
+        state.cat["yvelocity"] = -1*state.cat["yvelocity"]
+        state.mouse["xcord"] = state.mouse["xcord"] + state.mouse["xvelocity"]
+        state.mouse["ycord"] = state.mouse["ycord"]+state.mouse["yvelocity"]        
+        return (state)
 
     #causes mouse to bounce off x defined boundries of window 
     if state.mouse["xcord"] == (width - 50) or state.mouse["xcord"] == 0:
-        return (state.cat["xcord"] + state.cat["xvelocity"],  state.cat["xvelocity"] ,state.cat["ycord"] + state.cat["yvelocity"], state.cat["yvelocity"] , state.mouse["xcord"] - state.mouse["xvelocity"], -1 *state.mouse["xvelocity"], state.mouse["ycord"] - state.mouse["yvelocity"], state.mouse["yvelocity"] ,state.cheese["xcord"],state.cheese["ycord"])
+        state.cat["xcord"] = state.cat["xcord"] + state.cat["xvelocity"]
+        state.cat["ycord"] = state.cat["ycord"] + state.cat["yvelocity"]
+        state.mouse["xcord"] = state.mouse["xcord"] - state.mouse["xvelocity"]
+        state.mouse["ycord"] = state.mouse["ycord"] - state.mouse["yvelocity"] 
+        return (state)
 
     #causes cat1 to bounce off y defined boundries of window
     if state.mouse["xcord"] == (width - 50) or state.mouse["xcord"] == 0:
-        return (state.cat["xcord"] + state.cat["xvelocity"],  state.cat["xvelocity"] ,state.cat["ycord"] + state.cat["yvelocity"], state.cat["yvelocity"] , state.mouse["xcord"] - state.mouse["xvelocity"], -state.mouse["xvelocity"], state.mouse["ycord"] - state.mouse["yvelocity"],-1 * state.mouse["yvelocity"] ,state.cheese["xcord"],state.cheese["ycord"])
+        state.cat["xcord"] = state.cat["xcord"] + state.cat["xvelocity"]
+        state.cat["ycord"] = state.cat["ycord"] + state.cat["yvelocity"]
+        state.mouse["xcord"]  = state.mouse["xcord"] - state.mouse["xvelocity"]
+        state.mouse["xvelocity"] = -1*state.mouse["xvelocity"]
+        state.mouse["yvelocity"] = -1 * state.mouse["yvelocity"]
+        return (state)
     #hitbox detection for cheese
     if ((state.mouse["xcord"]-50) < state.cheese["xcord"]  < (state.mouse["xcord"]+50) and (state.mouse["ycord"]-50) < state.cheese["ycord"] < (state.mouse["ycord"]+50)):
         state.cat['xcord'] = cat["xcord"] + state.cat["xvelocity"]
-        
+        state.cat["ycord"] = state.cat["ycord"] + state.cat["yvelocity"]
+        state.mouse["xcord"] = state.mouse["xcord"] + state.mouse["xvelocity"]
+        state.mouse["ycord"] =  state.mouse["ycord"] + state.mouse["yvelocity"]
+        state.cheese["xcord"] = randint(0,420)
+        state.cheese["ycord"] = randint(0,420)
         return (state)
-                ],  state.cat["xvelocity"] ,state.cat["ycord"] + state.cat["yvelocity"], state.cat["yvelocity"] , state.mouse["xcord"] + state.mouse["xvelocity"], state.mouse["xvelocity"], state.mouse["ycord"] + state.mouse["yvelocity"], state.mouse["yvelocity"] ,(randint(0,420)),randint(0,420))
+
     else:
-        return(state.cat["xcord"] + state.cat["xvelocity"],  state.cat["xvelocity"] ,state.cat["ycord"] + state.cat["yvelocity"], state.cat["yvelocity"] , state.mouse["xcord"] + state.mouse["xvelocity"], state.mouse["xvelocity"], state.mouse["ycord"] + state.mouse["yvelocity"], state.mouse["yvelocity"] ,state.cheese["xcord"] , state.cheese["ycord"])
+        state.cat['xcord'] = cat["xcord"] + state.cat["xvelocity"]
+        state.cat["ycord"] = state.cat["ycord"] + state.cat["yvelocity"]
+        state.mouse["xcord"] = state.mouse["xcord"] + state.mouse["xvelocity"]
+        state.mouse["ycord"] =  state.mouse["ycord"] + state.mouse["yvelocity"]
+        return(state)
 
 ################################################################
 
